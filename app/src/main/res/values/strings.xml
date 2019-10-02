@@ -6,4 +6,6 @@
     <string name="programCreated">The program is created by</string>
     <string name="Creator">Your Name</string>
     <string name="About">About</string>
+    <string name="broca">BROCA INDEX</string>
+    <string name="BMI">Body Mass Index</string>
 </resources>
