@@ -12,4 +12,6 @@
     <string name="Male">Male</string>
     <string name="Female">Female</string>
     <string name="Height">Height</string>
+    <string name="AddInformation">Add your information here</string>
+    <string name="tryagain">Try again</string>
 </resources>
