@@ -3,23 +3,26 @@ package id.ac.polinema.idealbodyweight;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import id.ac.polinema.idealbodyweight.fragments.AboutFragment;
+import id.ac.polinema.idealbodyweight.fragments.BMIndexFragment;
 import id.ac.polinema.idealbodyweight.fragments.BrocaIndexFragment;
 import id.ac.polinema.idealbodyweight.fragments.MenuFragment;
 import id.ac.polinema.idealbodyweight.fragments.ResultFragment;
 import id.ac.polinema.idealbodyweight.util.BrocaIndex;
 
 public class MainActivity extends AppCompatActivity implements MenuFragment.OnFragmentInteractionListener,
-		BrocaIndexFragment.OnFragmentInteractionListener, ResultFragment.OnFragmentInteractionListener {
+		BrocaIndexFragment.OnFragmentInteractionListener,BMIndexFragment.OnFragmentInteractionListener, ResultFragment.OnFragmentInteractionListener {
 
 	// Deklarasikan atribut Fragment di sini
 	private AboutFragment aboutFragment;
 	private MenuFragment menuFragment;
 	private BrocaIndexFragment brocaIndexFragment;
+	private BMIndexFragment bmIndexFragment;
 	private ResultFragment resultFragment;
 
 	@Override
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 		aboutFragment = AboutFragment.newInstance("M. Sofiul Fuad R");
 		menuFragment = new MenuFragment();
 		brocaIndexFragment = new BrocaIndexFragment();
+		bmIndexFragment = new BMIndexFragment();
 		resultFragment = new ResultFragment();
 
 		getSupportFragmentManager().beginTransaction()
@@ -63,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 
 	@Override
 	public void onBodyMassIndexButtonClicked() {
-
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.fragment_container, bmIndexFragment)
+				.commit();
 	}
 
 	@Override
@@ -79,5 +85,10 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.fragment_container, brocaIndexFragment)
 				.commit();
+	}
+
+	@Override
+	public void onFragmentInteraction(Uri uri) {
+		
 	}
 }
