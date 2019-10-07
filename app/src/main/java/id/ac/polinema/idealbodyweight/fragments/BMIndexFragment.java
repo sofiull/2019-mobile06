@@ -9,8 +9,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import id.ac.polinema.idealbodyweight.R;
+import id.ac.polinema.idealbodyweight.util.BMIndex;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,15 +35,28 @@ public class BMIndexFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bmindex, container, false);
+        View view = inflater.inflate(R.layout.fragment_bmindex, container, false);
+        final EditText massText = view.findViewById(R.id.input_mass);
+        final EditText heightText = view.findViewById(R.id.input_height);
+
+        Button calculateButton = view.findViewById(R.id.button_calculate);
+        calculateButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    int massString = Integer.parseInt(massText.getText().toString());
+                    int heightString = Integer.parseInt(heightText.getText().toString());
+                    BMIndex bmIndex = new BMIndex(massString,heightString);
+                    mListener.onCheckBMIndexClicked(bmIndex.getClassification());
+                } else {
+                    Toast.makeText(getActivity(), "Please select gender and input your height", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -70,6 +87,6 @@ public class BMIndexFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onCheckBMIndexClicked(String classification);
     }
 }
