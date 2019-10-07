@@ -11,7 +11,7 @@ public class BrocaIndex {
     public BrocaIndex(int gender, int height){
         this.gender=gender;
         this.height=height;
-        this.calculate();
+        this.index=calculate();
     }
 
     public float getIndex(){
